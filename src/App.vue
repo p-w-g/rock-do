@@ -7,7 +7,10 @@
     </q-header>
 
     <q-page-container>
-      <InputForm />
+      <q-page>
+        <InputForm />
+        <NoteList />
+      </q-page>
     </q-page-container>
 
     <q-footer reveal elevated class="bg-grey-8 text-white">
@@ -22,12 +25,14 @@
 
 <script>
 import InputForm from "./components/InputForm.vue";
+import NoteList from "./components/NoteList.vue";
 
 export default {
   name: "LayoutDefault",
 
   components: {
-    InputForm: InputForm,
+    InputForm,
+    NoteList,
   },
 };
 </script>
