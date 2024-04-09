@@ -1,44 +1,20 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="q-pa-md">
-      <q-form @submit="onSubmitNote" @reset="onResetNote" class="q-gutter-md">
-        <q-input v-model="note" label="Note" />
-        <q-toggle v-model="accept" label="Anonymous note" />
-        <div>
-          <q-btn label="Add note" type="submit" color="primary" />
-          <q-btn
-            label="Reset"
-            type="reset"
-            color="primary"
-            flat
-            class="q-ml-sm"
-          />
-        </div>
-      </q-form>
-      <q-form
-        @submit="onSubmitCategory"
-        @reset="onResetCategory"
-        class="q-gutter-md"
-      >
-        <q-input v-model="category" label="Category" />
-        <q-select
-          v-model="selected"
-          :options="existingCategories"
-          label="Delete existing category"
+  <div class="q-pa-md">
+    <q-form @submit="onSubmitNote" @reset="onResetNote" class="q-gutter-md">
+      <q-input v-model="note" label="Note" />
+      <q-toggle v-model="anonymous" label="Anonymous note" />
+      <div>
+        <q-btn label="Add note" type="submit" color="primary" />
+        <q-btn
+          label="Reset"
+          type="reset"
+          color="primary"
+          flat
+          class="q-ml-sm"
         />
-        <div>
-          <q-btn label="Add category" type="submit" color="primary" />
-          <q-btn
-            label="Reset"
-            type="reset"
-            color="primary"
-            flat
-            class="q-ml-sm"
-          />
-        </div>
-      </q-form>
-    </div>
-  </q-page>
+      </div>
+    </q-form>
+  </div>
 </template>
 
 <style></style>
@@ -50,38 +26,18 @@ export default {
   name: "InputForm",
   setup() {
     const note = ref("");
-    const category = ref("");
-    const accept = ref(false);
-    const selected = ref(null);
-    const existingCategories = ref([
-      "TODO",
-      "IMPLEMENT",
-      "PERSISTENCE",
-      "AND",
-      "FETCH",
-      "PREEXISTING",
-      "CATEGORIES",
-    ]);
+    const anonymous = ref(false);
 
     return {
       note,
-      category,
-      accept,
-      selected,
-      existingCategories,
+      anonymous,
 
       onResetNote() {
         note.value = null;
-        accept.value = false;
-      },
-      onResetCategory() {
-        category.value = null;
+        anonymous.value = false;
       },
 
       onSubmitNote() {
-        alert("implement");
-      },
-      onSubmitCategory() {
         alert("implement");
       },
     };
