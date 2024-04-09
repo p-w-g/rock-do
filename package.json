@@ -12,6 +12,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.8.3",
+    "pinia": "^2.1.7",
     "quasar": "^2.15.2",
     "vue": "^3.2.13"
   },
