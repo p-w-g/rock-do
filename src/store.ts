@@ -3,7 +3,7 @@ import { Note } from "./interfaces";
 
 export const useNotesStore = defineStore("notes", {
   state: () => ({
-    notes: [
+    _notes: [
       {
         user: "first user",
         description: "first task",
@@ -14,9 +14,12 @@ export const useNotesStore = defineStore("notes", {
     ] as Note[],
     id: 0,
   }),
+  getters: {
+    notesList: (state) => state._notes,
+  },
   actions: {
     newNote(note: Note) {
-      this.notes.push({ ...note, id: this.id++ });
+      this._notes.push({ ...note, id: this.id++ });
     },
   },
 });
