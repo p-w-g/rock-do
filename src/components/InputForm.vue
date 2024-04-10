@@ -43,7 +43,7 @@ export default {
       },
 
       onSubmitNote() {
-        if (!note.value || !note.value.length) return;
+        if (!description.value || !description.value.length) return;
 
         const note = {
           description: description.value,
