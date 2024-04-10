@@ -1,7 +1,12 @@
 <template>
   <div class="q-pa-md">
-    <q-list bordered separator>
-      <q-slide-item @left="onLeft" @right="onRight">
+    <q-list v-if="notesList.length" bordered separator>
+      <q-slide-item
+        v-for="note in notesList"
+        v-bind:key="note.id"
+        @left="onLeft"
+        @right="onRight"
+      >
         <template v-slot:left>
           <q-icon name="done" />
         </template>
@@ -9,31 +14,7 @@
           <q-icon name="mode_edit" />
         </template>
         <q-item>
-          <q-item-section>Task 2</q-item-section>
-        </q-item>
-      </q-slide-item>
-
-      <q-slide-item @left="onLeft" @right="onRight">
-        <template v-slot:left>
-          <q-icon name="done" />
-        </template>
-        <template v-slot:right>
-          <q-icon name="mode_edit" />
-        </template>
-        <q-item>
-          <q-item-section>Task 3</q-item-section>
-        </q-item>
-      </q-slide-item>
-
-      <q-slide-item @left="onLeft" @right="onRight">
-        <template v-slot:left>
-          <q-icon name="done" />
-        </template>
-        <template v-slot:right>
-          <q-icon name="mode_edit" />
-        </template>
-        <q-item>
-          <q-item-section>Task 1</q-item-section>
+          <q-item-section>{{ note.description }}</q-item-section>
         </q-item>
       </q-slide-item>
     </q-list>
@@ -43,10 +24,14 @@
 <script>
 import { useQuasar } from "quasar";
 import { onBeforeUnmount } from "vue";
+import { storeToRefs } from "pinia";
+import { useNotesStore } from "../store.ts";
 
 export default {
   setup() {
     const $q = useQuasar();
+    const { notesList } = storeToRefs(useNotesStore());
+
     let timer;
 
     function finalize(reset) {
@@ -69,6 +54,8 @@ export default {
         // TODO: implement action
         finalize(reset);
       },
+
+      notesList,
     };
   },
 };
