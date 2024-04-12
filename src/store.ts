@@ -13,5 +13,10 @@ export const useNotesStore = defineStore("notes", {
     newNote(note: Note) {
       this._notes.push({ ...note, id: this.id++ });
     },
+
+    removeNote(sliderId: number) {
+      const getIndex = this._notes.findIndex(({ id }) => id === sliderId);
+      this._notes.splice(getIndex, 1);
+    },
   },
 });
