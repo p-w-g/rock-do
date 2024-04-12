@@ -16,9 +16,6 @@
     </q-form>
   </div>
 </template>
-
-<style></style>
-
 <script>
 import { ref } from "vue";
 import { useNotesStore } from "../store.ts";
