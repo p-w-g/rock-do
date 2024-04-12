@@ -5,28 +5,28 @@ test("CRUD operations", async ({ page }) => {
 
   await expect(page).toHaveTitle(/rock-do/);
 
-  // can add using enter
+  // adding a note is possible using enter
+  await page.getByRole("textbox").fill("First Task");
+  await page.keyboard.press("Enter");
 
-  // click note input
-  // type first task
-  // press enter
-
-  // can add using button
-
-  // click note input
-  // type second task
-  // click add note
+  // adding a note is possible using button
+  await page.getByRole("textbox").fill("Second Task");
+  await page.getByText("Add note").click();
 
   // reset button only cleans inputs
-  // click note input
-  // type third task
-  // click add note
+  await page.getByRole("textbox").fill("Third Task");
+  await page.getByText("Reset").click();
 
   // find only two tasks
+  await expect(page.getByText("First Task")).toBeVisible();
+  await expect(page.getByText("Second Task")).toBeVisible();
+  await expect(page.getByText("Third Task")).not.toBeVisible();
 
-  // edit second task
   // delete first task
+  // edit second task
 
   // only second task remains with the text "third task failed successfully"
   // clear button deletes everything
+
+  // add a task with text "Fifth task" and it should be with ID 0
 });
