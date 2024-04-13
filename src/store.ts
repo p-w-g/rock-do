@@ -25,5 +25,10 @@ export const useNotesStore = defineStore("notes", {
       const getIndex = this._notes.findIndex(({ id }) => id === sliderId);
       this._note = this._notes[getIndex];
     },
+
+    updateNote(note: Note) {
+      const getIndex = this._notes.findIndex(({ id }) => id === note.id);
+      this._notes[getIndex] = note;
+    },
   },
 });
