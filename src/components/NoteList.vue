@@ -1,7 +1,14 @@
 <template>
+  <EditModal v-model="editMode" />
   <div class="q-pa-md">
-    <q-list bordered separator>
-      <q-slide-item @left="onLeft" @right="onRight">
+    <q-list v-if="notesList.length" bordered separator>
+      <q-slide-item
+        v-for="note in notesList"
+        v-bind:key="note.id"
+        :id="note.id"
+        @left="(e) => removeNote({ reset: e.reset, id: note.id })"
+        @right="(e) => editNote({ reset: e.reset, id: note.id })"
+      >
         <template v-slot:left>
           <q-icon name="done" />
         </template>
@@ -9,31 +16,7 @@
           <q-icon name="mode_edit" />
         </template>
         <q-item>
-          <q-item-section>Task 2</q-item-section>
-        </q-item>
-      </q-slide-item>
-
-      <q-slide-item @left="onLeft" @right="onRight">
-        <template v-slot:left>
-          <q-icon name="done" />
-        </template>
-        <template v-slot:right>
-          <q-icon name="mode_edit" />
-        </template>
-        <q-item>
-          <q-item-section>Task 3</q-item-section>
-        </q-item>
-      </q-slide-item>
-
-      <q-slide-item @left="onLeft" @right="onRight">
-        <template v-slot:left>
-          <q-icon name="done" />
-        </template>
-        <template v-slot:right>
-          <q-icon name="mode_edit" />
-        </template>
-        <q-item>
-          <q-item-section>Task 1</q-item-section>
+          <q-item-section>{{ note.description }}</q-item-section>
         </q-item>
       </q-slide-item>
     </q-list>
@@ -41,33 +24,35 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
-import { onBeforeUnmount } from "vue";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useNotesStore } from "../store.ts";
+import EditModal from "./EditModal.vue";
 
 export default {
+  components: {
+    EditModal,
+  },
   setup() {
-    const $q = useQuasar();
-    let timer;
+    const { notesList } = storeToRefs(useNotesStore());
+    const notesStore = useNotesStore();
 
-    function finalize(reset) {
-      timer = setTimeout(() => {
-        reset();
-      }, 1000);
-    }
-
-    onBeforeUnmount(() => {
-      clearTimeout(timer);
-    });
+    const editMode = ref(false);
 
     return {
-      onLeft({ reset }) {
-        // TODO: implement action
-        finalize(reset);
+      notesList,
+      notesStore,
+      editMode,
+
+      removeNote({ reset, id }) {
+        reset();
+        notesStore.removeNote(id);
       },
 
-      onRight({ reset }) {
-        // TODO: implement action
-        finalize(reset);
+      editNote({ reset, id }) {
+        notesStore.choseNote(id);
+        reset();
+        editMode.value = true;
       },
     };
   },
