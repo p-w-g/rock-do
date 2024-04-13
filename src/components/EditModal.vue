@@ -1,0 +1,31 @@
+<template>
+  <div class="q-pa-md q-gutter-sm">
+    <q-dialog v-model="editMode" persistent backdrop-filter="sepia(90%)">
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">Current note</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input
+            dense
+            v-model="newDescription"
+            autofocus
+            @keyup.enter="editMode = false"
+          />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancel" v-close-popup />
+          <q-btn flat label="Update note" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
+</template>
+<script setup>
+import { ref, defineModel } from "vue";
+
+const editMode = defineModel();
+const newDescription = ref("");
+</script>
