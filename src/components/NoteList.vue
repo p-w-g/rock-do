@@ -50,6 +50,7 @@ export default {
       },
 
       editNote({ reset, id }) {
+        notesStore.choseNote(id);
         reset();
         editMode.value = true;
       },

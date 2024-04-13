@@ -5,9 +5,11 @@ export const useNotesStore = defineStore("notes", {
   state: () => ({
     _notes: [] as Note[],
     id: 0,
+    _note: {} as Note,
   }),
   getters: {
     notesList: (state) => state._notes,
+    chosenNote: (state) => state._note,
   },
   actions: {
     newNote(note: Note) {
@@ -17,6 +19,11 @@ export const useNotesStore = defineStore("notes", {
     removeNote(sliderId: number) {
       const getIndex = this._notes.findIndex(({ id }) => id === sliderId);
       this._notes.splice(getIndex, 1);
+    },
+
+    choseNote(sliderId: number) {
+      const getIndex = this._notes.findIndex(({ id }) => id === sliderId);
+      this._note = this._notes[getIndex];
     },
   },
 });

@@ -4,6 +4,7 @@
       <q-card style="min-width: 350px">
         <q-card-section>
           <div class="text-h6">Current note</div>
+          <p>{{ chosenNote.description }}</p>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
@@ -25,6 +26,10 @@
 </template>
 <script setup>
 import { ref, defineModel } from "vue";
+import { storeToRefs } from "pinia";
+import { useNotesStore } from "../store.ts";
+
+const { chosenNote } = storeToRefs(useNotesStore());
 
 const editMode = defineModel();
 const newDescription = ref("");
