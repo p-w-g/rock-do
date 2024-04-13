@@ -27,7 +27,6 @@ test("CRUD operations", async ({ page }) => {
   await expect(task_3).not.toBeVisible();
 
   // delete first task
-
   await task_1.dragTo(task_1, {
     sourcePosition: { x: 0, y: 0 },
     targetPosition: { x: 150, y: 0 },
@@ -35,10 +34,28 @@ test("CRUD operations", async ({ page }) => {
   await expect(task_1).not.toBeVisible();
 
   // edit second task
-  // only second task remains with the text "third task failed successfully"
-  // await expect(task_2).not.toBeVisible();
-  // await expect(page.getByText("Third task failed successfully")).toBeVisible();
-  // clear button deletes everything
+  await task_2.dragTo(task_2, {
+    sourcePosition: { x: 150, y: 0 },
+    targetPosition: { x: 0, y: 0 },
+  });
 
-  // add a task with text "Fifth task" and it should be with ID 0
+  await expect(
+    page.getByRole("dialog").getByText("Current note")
+  ).toBeVisible();
+
+  await page
+    .getByRole("dialog")
+    .getByRole("textbox")
+    .fill("Third task failed successfully");
+
+  await page
+    .getByRole("dialog")
+    .getByRole("button")
+    .getByText("Update Note")
+    .click();
+
+  await expect(task_2).not.toBeVisible();
+  await expect(page.getByText("Third task failed successfully")).toBeVisible();
+
+  // clear button deletes everything
 });
