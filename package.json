@@ -7,14 +7,20 @@
     "dev": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --open"
   },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
     "core-js": "^3.8.3",
+    "pinia": "^2.1.7",
+    "quasar": "^2.15.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.0",
     "@types/jest": "^27.0.1",
+    "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -32,9 +38,10 @@
     "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.5",
     "prettier": "^2.4.1",
-    "sass": "^1.32.7",
-    "sass-loader": "^12.0.0",
+    "sass": "^1.74.1",
+    "sass-loader": "^14.1.1",
     "ts-jest": "^27.0.4",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "vue-cli-plugin-quasar": "~5.0.2"
   }
 }
