@@ -16,7 +16,13 @@
     <q-footer reveal elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <div>Get stuff done</div>
+          <q-btn
+            class="glossy"
+            color="primary"
+            icon="delete_forever"
+            label="Clear All"
+            @click="clearAll"
+          />
         </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -26,6 +32,7 @@
 <script>
 import InputForm from "./components/InputForm.vue";
 import NoteList from "./components/NoteList.vue";
+import { useNotesStore } from "./store.ts";
 
 export default {
   name: "LayoutDefault",
@@ -33,6 +40,15 @@ export default {
   components: {
     InputForm,
     NoteList,
+  },
+  setup() {
+    const notesStore = useNotesStore();
+
+    return {
+      clearAll() {
+        notesStore.clearAll();
+      },
+    };
   },
 };
 </script>

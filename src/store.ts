@@ -30,5 +30,10 @@ export const useNotesStore = defineStore("notes", {
       const getIndex = this._notes.findIndex(({ id }) => id === note.id);
       this._notes[getIndex] = note;
     },
+
+    clearAll() {
+      this._notes = [];
+      this._note = {} as Note;
+    },
   },
 });

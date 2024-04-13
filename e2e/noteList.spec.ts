@@ -106,4 +106,16 @@ test("CRUD operations", async ({ page }) => {
   ).toBeVisible();
   await expect(task_5).not.toBeVisible();
   await expect(task_4).not.toBeVisible();
+
+  await page.getByText("Clear All").click();
+
+  await expect(task_1).not.toBeVisible();
+  await expect(task_2).not.toBeVisible();
+  await expect(task_3).not.toBeVisible();
+  await expect(task_4).not.toBeVisible();
+  await expect(task_5).not.toBeVisible();
+  await expect(page.getByText("Sixth Task")).not.toBeVisible();
+  await expect(
+    page.getByText("Updated 4th task to Seventh Task")
+  ).not.toBeVisible();
 });
