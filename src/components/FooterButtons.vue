@@ -23,8 +23,8 @@
             class="glossy"
             color="primary"
             icon="login"
-            label="Sign in"
-            @click="signin"
+            label="Sign in with Google "
+            @click="signingPopup"
           />
         </div>
       </q-toolbar-title>
@@ -32,9 +32,16 @@
   </q-footer>
 </template>
 <script setup>
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { useNotesStore, useUserStore } from "../store.ts";
 import { storeToRefs } from "pinia";
 
+const userStore = useUserStore();
 const notesStore = useNotesStore();
 const { isLoggedIn } = storeToRefs(useUserStore());
 
@@ -42,11 +49,18 @@ function clearAll() {
   notesStore.clearAll();
 }
 
-function signin() {
-  // todo
+function signingPopup() {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+    .then((data) => {
+      userStore.setUserData(data);
+      userStore.toggleIsLoggedIn();
+    })
+    .catch((e) => console.error(e));
 }
 
 function signout() {
-  // todo
+  const auth = getAuth();
+  signOut(auth).then(() => userStore.signout());
 }
 </script>
