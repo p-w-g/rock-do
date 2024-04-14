@@ -22,13 +22,6 @@
           <q-btn
             class="glossy"
             color="primary"
-            icon="person_add"
-            label="Register"
-            @click="register"
-          />
-          <q-btn
-            class="glossy"
-            color="primary"
             icon="login"
             label="Sign in"
             @click="signin"
@@ -47,10 +40,6 @@ const { isLoggedIn } = storeToRefs(useUserStore());
 
 function clearAll() {
   notesStore.clearAll();
-}
-
-function register() {
-  // todo
 }
 
 function signin() {
