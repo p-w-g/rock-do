@@ -30,5 +30,39 @@ export const useNotesStore = defineStore("notes", {
       const getIndex = this._notes.findIndex(({ id }) => id === note.id);
       this._notes[getIndex] = note;
     },
+
+    clearAll() {
+      this._notes = [];
+      this._note = {} as Note;
+    },
+  },
+});
+
+export const useUserStore = defineStore("user", {
+  state: () => ({
+    _user: {},
+    _isLoggedIn: false,
+  }),
+
+  getters: {
+    isLoggedIn: (state) => state._isLoggedIn,
+    loggedInUser: (state) => state._user,
+  },
+
+  actions: {
+    signout() {
+      this._isLoggedIn = false;
+      this._user = {};
+    },
+
+    toggleIsLoggedIn() {
+      this._isLoggedIn = !this._isLoggedIn;
+    },
+
+    // at this point I have no idea what Firebase will provide
+    // and using unknown spawns another TS issue. hence: TODO fix type
+    setUserData(data: any) {
+      this._user = data;
+    },
   },
 });

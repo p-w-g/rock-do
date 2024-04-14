@@ -8,31 +8,32 @@
 
     <q-page-container>
       <q-page>
-        <InputForm />
-        <NoteList />
+        <template v-if="isLoggedIn">
+          <InputForm />
+          <NoteList />
+        </template>
+        <template v-else>
+          <q-page>
+            <div class="q-pa-md">
+              <p>You need to be registered and logged in to work with notes</p>
+              <RegisterForm />
+            </div>
+          </q-page>
+        </template>
       </q-page>
     </q-page-container>
-
-    <q-footer reveal elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <div>Get stuff done</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
+    <FooterButtons />
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import InputForm from "./components/InputForm.vue";
 import NoteList from "./components/NoteList.vue";
+import FooterButtons from "./components/FooterButtons.vue";
+import RegisterForm from "./components/RegisterForm.vue";
 
-export default {
-  name: "LayoutDefault",
+import { useUserStore } from "./store.ts";
+import { storeToRefs } from "pinia";
 
-  components: {
-    InputForm,
-    NoteList,
-  },
-};
+const { isLoggedIn } = storeToRefs(useUserStore());
 </script>
