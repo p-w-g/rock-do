@@ -8,47 +8,30 @@
 
     <q-page-container>
       <q-page>
-        <InputForm />
-        <NoteList />
+        <template v-if="isLoggedIn">
+          <InputForm />
+          <NoteList />
+        </template>
+        <template v-else>
+          <q-page>
+            <div class="q-pa-md">
+              <p>You need to be logged in to work with notes</p>
+            </div>
+          </q-page>
+        </template>
       </q-page>
     </q-page-container>
-
-    <q-footer reveal elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-btn
-            class="glossy"
-            color="primary"
-            icon="delete_forever"
-            label="Clear All"
-            @click="clearAll"
-          />
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
+    <FooterButtons />
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import InputForm from "./components/InputForm.vue";
 import NoteList from "./components/NoteList.vue";
-import { useNotesStore } from "./store.ts";
+import FooterButtons from "./components/FooterButtons.vue";
 
-export default {
-  name: "LayoutDefault",
+import { useUserStore } from "./store.ts";
+import { storeToRefs } from "pinia";
 
-  components: {
-    InputForm,
-    NoteList,
-  },
-  setup() {
-    const notesStore = useNotesStore();
-
-    return {
-      clearAll() {
-        notesStore.clearAll();
-      },
-    };
-  },
-};
+const { isLoggedIn } = storeToRefs(useUserStore());
 </script>
