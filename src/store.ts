@@ -37,3 +37,27 @@ export const useNotesStore = defineStore("notes", {
     },
   },
 });
+
+export const useUserStore = defineStore("user", {
+  state: () => ({
+    _user: {},
+    _isLoggedIn: false,
+  }),
+
+  getters: {
+    isLoggedIn: (state) => state._isLoggedIn,
+    loggedInUser: (state) => state._user,
+  },
+
+  actions: {
+    logIn() {
+      // todo
+    },
+    logOut() {
+      // todo
+    },
+    register() {
+      // todo
+    },
+  },
+});
