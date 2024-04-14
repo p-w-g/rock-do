@@ -50,14 +50,22 @@ export const useUserStore = defineStore("user", {
   },
 
   actions: {
-    logIn() {
+    signin() {
       // todo
     },
-    logOut() {
+
+    signout() {
       // todo
     },
-    register() {
-      // todo
+
+    toggleIsLoggedIn() {
+      this._isLoggedIn = !this._isLoggedIn;
+    },
+
+    // at this point I have no idea what Firebase will provide
+    // and using unknown spawns another TS issue. hence: TODO fix type
+    setUserData(data: any) {
+      this._user = data;
     },
   },
 });

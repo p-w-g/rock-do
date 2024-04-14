@@ -18,14 +18,28 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useUserStore } from "../store.ts";
+
+const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
 
 function register() {
-  // todo
+  createUserWithEmailAndPassword(getAuth(), email.value, password.value).then(
+    (data) => {
+      email.value = null;
+      password.value = false;
+
+      userStore.setUserData(data);
+      userStore.toggleIsLoggedIn();
+    }
+  );
 }
+
 function resetForm() {
-  // todo
+  email.value = null;
+  password.value = false;
 }
 </script>
