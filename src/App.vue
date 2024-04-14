@@ -15,7 +15,8 @@
         <template v-else>
           <q-page>
             <div class="q-pa-md">
-              <p>You need to be logged in to work with notes</p>
+              <p>You need to be registered and logged in to work with notes</p>
+              <RegisterForm />
             </div>
           </q-page>
         </template>
@@ -29,6 +30,7 @@
 import InputForm from "./components/InputForm.vue";
 import NoteList from "./components/NoteList.vue";
 import FooterButtons from "./components/FooterButtons.vue";
+import RegisterForm from "./components/RegisterForm.vue";
 
 import { useUserStore } from "./store.ts";
 import { storeToRefs } from "pinia";
