@@ -50,12 +50,9 @@ export const useUserStore = defineStore("user", {
   },
 
   actions: {
-    signin() {
-      // todo
-    },
-
     signout() {
-      // todo
+      this._isLoggedIn = false;
+      this._user = {};
     },
 
     toggleIsLoggedIn() {
