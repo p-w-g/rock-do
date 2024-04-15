@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-form @submit="register" @reset="resetForm" class="q-gutter-md">
       <q-input v-model.trim="email" label="Email" />
-      <q-input v-model.trim="password" label="Password" />
+      <q-input v-model.trim="password" type="password" label="Password" />
       <q-btn label="Register with password" type="submit" color="primary" />
       <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
       <q-btn label="Sign in" color="secondary" @click="signin" />
@@ -26,8 +26,8 @@ const email = ref("");
 const password = ref("");
 const loginError = ref("");
 
-function register() {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+async function register() {
+  await createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       loginError.value = "";
       email.value = null;
@@ -39,8 +39,8 @@ function register() {
     .catch((e) => (loginError.value = e));
 }
 
-function signin() {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value)
+async function signin() {
+  await signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       loginError.value = "";
       email.value = null;
