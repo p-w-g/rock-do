@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-form @submit="register" @reset="resetForm" class="q-gutter-md">
       <q-input v-model.trim="email" label="Email" />
-      <q-input v-model.trim="password" label="Password" />
+      <q-input v-model.trim="password" type="password" label="Password" />
       <q-btn label="Register with password" type="submit" color="primary" />
       <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
       <q-btn label="Sign in" color="secondary" @click="signin" />
