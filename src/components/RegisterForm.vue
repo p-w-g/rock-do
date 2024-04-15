@@ -26,8 +26,8 @@ const email = ref("");
 const password = ref("");
 const loginError = ref("");
 
-function register() {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+async function register() {
+  await createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       loginError.value = "";
       email.value = null;
@@ -39,8 +39,8 @@ function register() {
     .catch((e) => (loginError.value = e));
 }
 
-function signin() {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value)
+async function signin() {
+  await signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       loginError.value = "";
       email.value = null;

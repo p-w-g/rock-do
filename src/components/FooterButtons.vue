@@ -49,9 +49,9 @@ function clearAll() {
   notesStore.clearAll();
 }
 
-function signingPopup() {
+async function signingPopup() {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(getAuth(), provider)
+  await signInWithPopup(getAuth(), provider)
     .then((data) => {
       userStore.setUserData(data);
       userStore.toggleIsLoggedIn();
@@ -59,8 +59,8 @@ function signingPopup() {
     .catch((e) => console.error(e));
 }
 
-function signout() {
+async function signout() {
   const auth = getAuth();
-  signOut(auth).then(() => userStore.signout());
+  await signOut(auth).then(() => userStore.signout());
 }
 </script>
