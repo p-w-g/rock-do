@@ -24,7 +24,7 @@
     </q-dialog>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, defineModel } from "vue";
 import { storeToRefs } from "pinia";
 import { useNotesStore } from "../store.ts";

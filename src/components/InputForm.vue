@@ -16,42 +16,30 @@
     </q-form>
   </div>
 </template>
-<script>
+<script setup lang="ts">
 import { ref } from "vue";
 import { useNotesStore } from "../store.ts";
 
-export default {
-  name: "InputForm",
+const notesStore = useNotesStore();
 
-  setup() {
-    const notesStore = useNotesStore();
+const description = ref("");
+const anonymous = ref(false);
 
-    const description = ref("");
-    const anonymous = ref(false);
+function onResetNote() {
+  description.value = null;
+  anonymous.value = false;
+}
 
-    return {
-      notesStore,
-      description,
-      anonymous,
+function onSubmitNote() {
+  if (!description.value || !description.value.length) return;
 
-      onResetNote() {
-        description.value = null;
-        anonymous.value = false;
-      },
+  const note = {
+    description: description.value,
+    anonymous: anonymous.value,
+  };
+  notesStore.newNote(note);
 
-      onSubmitNote() {
-        if (!description.value || !description.value.length) return;
-
-        const note = {
-          description: description.value,
-          anonymous: anonymous.value,
-        };
-        notesStore.newNote(note);
-
-        description.value = null;
-        anonymous.value = false;
-      },
-    };
-  },
-};
+  description.value = null;
+  anonymous.value = false;
+}
 </script>
