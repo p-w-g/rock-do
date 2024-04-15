@@ -11,7 +11,7 @@
     <p v-if="loginError">{{ loginError }}</p>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import {
   getAuth,

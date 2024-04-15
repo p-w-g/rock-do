@@ -23,38 +23,25 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useNotesStore } from "../store.ts";
 import EditModal from "./EditModal.vue";
 
-export default {
-  components: {
-    EditModal,
-  },
-  setup() {
-    const { notesList } = storeToRefs(useNotesStore());
-    const notesStore = useNotesStore();
+const { notesList } = storeToRefs(useNotesStore());
+const notesStore = useNotesStore();
 
-    const editMode = ref(false);
+const editMode = ref(false);
 
-    return {
-      notesList,
-      notesStore,
-      editMode,
+function removeNote({ reset, id }) {
+  reset();
+  notesStore.removeNote(id);
+}
 
-      removeNote({ reset, id }) {
-        reset();
-        notesStore.removeNote(id);
-      },
-
-      editNote({ reset, id }) {
-        notesStore.choseNote(id);
-        reset();
-        editMode.value = true;
-      },
-    };
-  },
-};
+function editNote({ reset, id }) {
+  notesStore.choseNote(id);
+  reset();
+  editMode.value = true;
+}
 </script>

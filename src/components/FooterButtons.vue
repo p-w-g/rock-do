@@ -31,7 +31,7 @@
     </q-toolbar>
   </q-footer>
 </template>
-<script setup>
+<script setup lang="ts">
 import {
   getAuth,
   GoogleAuthProvider,
